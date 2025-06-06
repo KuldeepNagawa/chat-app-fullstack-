@@ -12,7 +12,6 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
 app.use(cookieParser());
@@ -33,7 +32,9 @@ if(process.env.NODE_ENV==="production"){
     })
 }
 
-server.listen(5001, () => {
-    console.log("server is running on PORT:"+ PORT);
-    connectDB();
-});  
+const PORT = process.env.PORT || 5001;
+
+server.listen(PORT, () => {
+  console.log("server is running on PORT:" + PORT);
+  connectDB();
+});
